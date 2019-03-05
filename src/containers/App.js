@@ -1,12 +1,47 @@
 import React, { Component } from 'react';
-import './App.css';
+import Particles from 'react-particles-js';
+import Clarifai from 'clarifai';
 import Nav from '../components/Nav/Nav';
 import Logo from '../components/Logo/Logo';
 import ImageForm from '../components/ImageForm/ImageForm';
 import Rank from '../components/Rank/Rank';
-import Particles from 'react-particles-js';
+import './App.css';
+
+const app = new Clarifai.App({
+  apiKey: '5e6319488c3e4d4188e84f5844603111',
+});
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      input: '',
+    };
+  }
+
+  onInputChange = e => {
+    console.log(e.target.value);
+  };
+
+  onDetectButtonSubmit = () => {
+    console.log('click');
+    app.models
+      .predict(
+        'a403429f2ddf4b49b307e318f00e528b',
+        'https://samples.clarifai.com/face-det.jpg',
+      )
+      .then(
+        function(response) {
+          // do something with response
+          console.log(response);
+        },
+        function(err) {
+          // there was an error
+        },
+      );
+  };
+
   render() {
     return (
       <div className='App'>
@@ -63,7 +98,10 @@ class App extends Component {
         <Logo />
         <h1 className='title'>Stellar</h1>
         <Rank />
-        <ImageForm />
+        <ImageForm
+          onInputChange={this.onInputChange}
+          onDetectButtonSubmit={this.onDetectButtonSubmit}
+        />
       </div>
     );
   }
