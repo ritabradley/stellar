@@ -15,7 +15,7 @@ class App extends Component {
           params={{
             particles: {
               number: {
-                value: 150,
+                value: 100,
                 density: {
                   enable: true,
                   value_area: 1000,
@@ -26,8 +26,8 @@ class App extends Component {
                 opacity: 0.07,
               },
               move: {
-                direction: 'bottom-right',
-                speed: 0.3,
+                direction: 'none',
+                speed: 0.8,
               },
               shape: {
                 type: 'star',
