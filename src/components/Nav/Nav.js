@@ -1,9 +1,12 @@
 import React from 'react';
 
-const Nav = () => {
+const Nav = ({ onRouteChange }) => {
   return (
     <nav className='d-flex justify-content-end nav'>
-      <a className='nav-item p-3 text-light' href='/'>
+      <a
+        onClick={() => onRouteChange('signin')}
+        className='nav-item p-3 text-light'
+        href='/'>
         Sign Out
       </a>
     </nav>
