@@ -5,6 +5,7 @@ import Nav from '../components/Nav/Nav';
 import Logo from '../components/Logo/Logo';
 import ImageForm from '../components/ImageForm/ImageForm';
 import Rank from '../components/Rank/Rank';
+import FaceRecognizer from '../components/FaceRecoginzer/FaceRecognizer';
 import './App.css';
 
 const app = new Clarifai.App({
@@ -17,29 +18,41 @@ class App extends Component {
 
     this.state = {
       input: '',
+      imageUrl: '',
+      box: {},
     };
   }
 
   onInputChange = e => {
-    console.log(e.target.value);
+    this.setState({ input: e.target.value });
+  };
+
+  displayFaceDetectionBox = box => {
+    this.setState({ box });
+  };
+
+  calcFaceLocation = data => {
+    const clarifaiFace =
+      data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('inputimage');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    return {
+      leftCol: clarifaiFace.left_col * width,
+      topRow: clarifaiFace.top_row * height,
+      rightCol: width - clarifaiFace.right_col * width,
+      bottomRow: height - clarifaiFace.bottom_row * height,
+    };
   };
 
   onDetectButtonSubmit = () => {
-    console.log('click');
+    this.setState({ imageUrl: this.state.input });
     app.models
-      .predict(
-        'a403429f2ddf4b49b307e318f00e528b',
-        'https://samples.clarifai.com/face-det.jpg',
+      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+      .then(response =>
+        this.displayFaceDetectionBox(this.calcFaceLocation(response)),
       )
-      .then(
-        function(response) {
-          // do something with response
-          console.log(response);
-        },
-        function(err) {
-          // there was an error
-        },
-      );
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -102,6 +115,7 @@ class App extends Component {
           onInputChange={this.onInputChange}
           onDetectButtonSubmit={this.onDetectButtonSubmit}
         />
+        <FaceRecognizer box={this.state.box} imageUrl={this.state.imageUrl} />
       </div>
     );
   }
