@@ -13,6 +13,7 @@
     "url": "https://github.com/ritabradley/stellar-face-finder.git"
   },
   "dependencies": {
+    "clarifai": "^2.9.0",
     "hover.css": "^2.3.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",

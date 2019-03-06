@@ -2,7 +2,7 @@ import React from 'react';
 import 'hover.css';
 import './ImageForm.css';
 
-const ImageForm = () => {
+const ImageForm = ({ onInputChange, onDetectButtonSubmit }) => {
   return (
     <div>
       <p className='lead text-light'>
@@ -13,8 +13,11 @@ const ImageForm = () => {
           <input
             className='image-input border border-light rounded w-50 mr-3'
             type='text'
+            onChange={onInputChange}
           />
-          <button className='btn btn-outline-light detect-button hvr-grow'>
+          <button
+            className='btn btn-outline-light detect-button hvr-grow'
+            onClick={onDetectButtonSubmit}>
             Detect
           </button>
         </div>
