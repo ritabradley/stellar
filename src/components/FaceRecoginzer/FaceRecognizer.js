@@ -6,12 +6,12 @@ const FaceRecognizer = ({ imageUrl, box }) => {
       <div className='position-absolute mt-2'>
         <img
           id='inputimage'
-          alt='uploaded by user'
           width='500px'
           height='auto'
+          alt=''
           src={
             imageUrl ||
-            'https://images.unsplash.com/photo-1551214012-84f95e060dee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80'
+            'https://images.pexels.com/photos/936112/pexels-photo-936112.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
           }
         />
         <div
