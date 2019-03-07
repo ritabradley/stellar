@@ -7,7 +7,7 @@ const Signin = ({ onRouteChange }) => {
       <div
         className='py-4 text-center card bg-transparent shadow text-light'
         style={{ width: '18rem' }}>
-        <form>
+        <div>
           <legend className='display-4 mb-4'>Sign In</legend>
           <div className='form-group mx-4'>
             <label htmlFor='exampleInputEmail1'>Email address</label>
@@ -32,16 +32,19 @@ const Signin = ({ onRouteChange }) => {
             <button
               onClick={() => onRouteChange('home')}
               type='submit'
-              className='btn btn-outline-light'>
-              Sign up
+              className='btn custom-button'>
+              Sign in
             </button>
           </div>
           <div>
-            <button type='button' className='btn btn-link text-warning'>
+            <button
+              onClick={() => onRouteChange('register')}
+              type='button'
+              className='btn btn-link orange'>
               register
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
