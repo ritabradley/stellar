@@ -1,0 +1,7 @@
+.bg-transparent {
+  background-color: transparent;
+}
+
+.orange {
+  color: var(--link-color);
+}

@@ -6,6 +6,8 @@ import Logo from '../components/Logo/Logo';
 import ImageForm from '../components/ImageForm/ImageForm';
 import Rank from '../components/Rank/Rank';
 import FaceRecognizer from '../components/FaceRecoginzer/FaceRecognizer';
+import Signin from '../components/Signin/Signin';
+import Register from '../components/Register/Register';
 import './App.css';
 
 const app = new Clarifai.App({
@@ -20,6 +22,8 @@ class App extends Component {
       input: '',
       imageUrl: '',
       box: {},
+      route: 'signin',
+      isSignedIn: false,
     };
   }
 
@@ -46,16 +50,27 @@ class App extends Component {
   };
 
   onDetectButtonSubmit = () => {
-    this.setState({ imageUrl: this.state.input });
+    const { input } = this.state;
+    this.setState({ imageUrl: input });
     app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+      .predict(Clarifai.FACE_DETECT_MODEL, input)
       .then(response =>
         this.displayFaceDetectionBox(this.calcFaceLocation(response)),
       )
       .catch(err => console.log(err));
   };
 
+  onRouteChange = route => {
+    if (route === 'signout') {
+      this.setState({ isSignedIn: false, imageUrl: '' });
+    } else if (route === 'home') {
+      this.setState({ isSignedIn: true });
+    }
+    this.setState({ route: route });
+  };
+
   render() {
+    const { isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className='App'>
         <Particles
@@ -107,15 +122,23 @@ class App extends Component {
             retina_detect: true,
           }}
         />
-        <Nav />
-        <Logo />
-        <h1 className='title'>Stellar</h1>
-        <Rank />
-        <ImageForm
-          onInputChange={this.onInputChange}
-          onDetectButtonSubmit={this.onDetectButtonSubmit}
-        />
-        <FaceRecognizer box={this.state.box} imageUrl={this.state.imageUrl} />
+        <Nav isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
+        {route === 'home' ? (
+          <div>
+            <Logo />
+            <h1 className='title'>Stellar</h1>
+            <Rank />
+            <ImageForm
+              onInputChange={this.onInputChange}
+              onDetectButtonSubmit={this.onDetectButtonSubmit}
+            />
+            <FaceRecognizer box={box} imageUrl={imageUrl} />
+          </div>
+        ) : route === 'signin' ? (
+          <Signin onRouteChange={this.onRouteChange} />
+        ) : (
+          <Register onRouteChange={this.onRouteChange} />
+        )}
       </div>
     );
   }

@@ -16,7 +16,7 @@ const ImageForm = ({ onInputChange, onDetectButtonSubmit }) => {
             onChange={onInputChange}
           />
           <button
-            className='btn btn-outline-light detect-button hvr-grow'
+            className='btn custom-button detect-button hvr-grow'
             onClick={onDetectButtonSubmit}>
             Detect
           </button>

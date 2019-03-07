@@ -1,3 +1,7 @@
+:root {
+  --link-color: #FDA737;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -10,4 +14,15 @@ body {
   background-image: linear-gradient(to bottom, #0250c5 0%, #861da7 100%);
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.custom-button {
+  color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
+.custom-button:hover {
+  color: var(--link-color);
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
 }
