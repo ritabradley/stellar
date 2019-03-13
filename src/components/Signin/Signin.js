@@ -1,7 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Signin.css';
 
 const Signin = ({ onRouteChange }) => {
+  let [signInEmail, setEmail] = useState('');
+  let [signInPassword, setPassword] = useState('');
+
+  const onEmailChange = e => {
+    setEmail((signInEmail = e.target.value));
+  };
+  const onPasswordChange = e => {
+    setPassword((signInPassword = e.target.value));
+  };
+
+  const onSubmitSignIn = () => {
+    fetch('http://localhost:3000/signin', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: signInEmail, password: signInPassword }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data === 'success') onRouteChange('home');
+      });
+  };
+
   return (
     <div className='d-flex justify-content-center align-items-center'>
       <div
@@ -12,6 +34,7 @@ const Signin = ({ onRouteChange }) => {
           <div className='form-group mx-4'>
             <label htmlFor='exampleInputEmail1'>Email address</label>
             <input
+              onChange={onEmailChange}
               type='email'
               className='form-control'
               id='exampleInputEmail1'
@@ -22,6 +45,7 @@ const Signin = ({ onRouteChange }) => {
           <div className='form-group mx-4'>
             <label htmlFor='exampleInputPassword1'>Password</label>
             <input
+              onChange={onPasswordChange}
               type='password'
               className='form-control'
               id='exampleInputPassword1'
@@ -30,7 +54,7 @@ const Signin = ({ onRouteChange }) => {
           </div>
           <div>
             <button
-              onClick={() => onRouteChange('home')}
+              onClick={onSubmitSignIn}
               type='submit'
               className='btn custom-button'>
               Sign in
