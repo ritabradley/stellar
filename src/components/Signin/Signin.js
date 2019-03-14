@@ -16,7 +16,10 @@ const Signin = ({ onRouteChange }) => {
     fetch('http://localhost:3000/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: signInEmail, password: signInPassword }),
+      body: JSON.stringify({
+        email: signInEmail,
+        password: signInPassword,
+      }),
     })
       .then(response => response.json())
       .then(data => {
