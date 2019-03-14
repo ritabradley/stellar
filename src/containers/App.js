@@ -58,12 +58,30 @@ class App extends Component {
 
   onDetectButtonSubmit = () => {
     const { input } = this.state;
+    const { id } = this.state.user;
     this.setState({ imageUrl: input });
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, input)
-      .then(response =>
-        this.displayFaceDetectionBox(this.calcFaceLocation(response)),
-      )
+      .then(response => {
+        if (response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id,
+            }),
+          })
+            .then(response => response.json())
+            .then(count => {
+              this.setState(
+                Object.assign(this.state.user, {
+                  entries: count,
+                }),
+              );
+            });
+        }
+        this.displayFaceDetectionBox(this.calcFaceLocation(response));
+      })
       .catch(err => console.log(err));
   };
 
@@ -89,7 +107,7 @@ class App extends Component {
   };
 
   render() {
-    const { isSignedIn, imageUrl, route, box } = this.state;
+    const { isSignedIn, imageUrl, route, box, name, entries } = this.state;
     return (
       <div className='App'>
         <Particles
@@ -146,7 +164,7 @@ class App extends Component {
           <div>
             <Logo />
             <h1 className='title'>Stellar</h1>
-            <Rank />
+            <Rank name={name} entries={entries} />
             <ImageForm
               onInputChange={this.onInputChange}
               onDetectButtonSubmit={this.onDetectButtonSubmit}
@@ -154,7 +172,7 @@ class App extends Component {
             <FaceRecognizer box={box} imageUrl={imageUrl} />
           </div>
         ) : route === 'signin' ? (
-          <Signin onRouteChange={this.onRouteChange} />
+          <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
         ) : (
           <Register
             loadUser={this.loadUser}
