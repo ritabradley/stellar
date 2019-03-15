@@ -2,7 +2,7 @@
   "name": "stellar-face-finder",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ritabradley.github.io/stellar-face-finder",
+  "homepage": "https://ritabradley.github.io/stellar",
   "description": "A single page web app that lets you take an image URL and upload it to the interface where our face recognizer will detect any faces in the image.",
   "keywords": [
     "machine learning",
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ritabradley/stellar-face-finder.git"
+    "url": "https://github.com/ritabradley/stellar.git"
   },
   "dependencies": {
     "clarifai": "^2.9.0",
