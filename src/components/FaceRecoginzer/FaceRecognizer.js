@@ -9,10 +9,7 @@ const FaceRecognizer = ({ imageUrl, box }) => {
           width='500px'
           height='auto'
           alt=''
-          src={
-            imageUrl ||
-            'https://images.pexels.com/photos/936112/pexels-photo-936112.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-          }
+          src={imageUrl}
         />
         <div
           className='bounding-box'
