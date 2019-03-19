@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import './Register.css';
 
 const Register = ({ onRouteChange, loadUser }) => {
-  let [registerName, setName] = useState('');
-  let [registerEmail, setEmail] = useState('');
-  let [registerPassword, setPassword] = useState('');
+  let [name, setName] = useState('');
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
 
   const onNameChange = e => {
-    setName((registerName = e.target.value));
+    setName((name = e.target.value));
   };
   const onEmailChange = e => {
-    setEmail((registerEmail = e.target.value));
+    setEmail((email = e.target.value));
   };
   const onPasswordChange = e => {
-    setPassword((registerPassword = e.target.value));
+    setPassword((password = e.target.value));
   };
 
   const onRegisterSubmit = () => {
@@ -21,9 +21,9 @@ const Register = ({ onRouteChange, loadUser }) => {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: registerName,
-        email: registerEmail,
-        password: registerPassword,
+        name,
+        email,
+        password,
       }),
     })
       .then(response => response.json())
@@ -31,7 +31,6 @@ const Register = ({ onRouteChange, loadUser }) => {
         if (user) {
           loadUser(user);
           onRouteChange('home');
-          console.log(registerName, registerEmail, registerPassword);
         }
       });
   };

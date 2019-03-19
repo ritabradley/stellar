@@ -2,10 +2,15 @@
   --link-color: #FDA737;
 }
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -13,7 +18,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: linear-gradient(to bottom, #0250c5 0%, #861da7 100%);
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .custom-button {

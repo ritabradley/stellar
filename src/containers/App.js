@@ -107,7 +107,8 @@ class App extends Component {
   };
 
   render() {
-    const { isSignedIn, imageUrl, route, box, name, entries } = this.state;
+    const { isSignedIn, imageUrl, route, box } = this.state;
+    const { name, entries } = this.state.user;
     return (
       <div className='App'>
         <Particles

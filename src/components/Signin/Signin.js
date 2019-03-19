@@ -38,23 +38,23 @@ const Signin = ({ onRouteChange, loadUser }) => {
         <div>
           <legend className='display-4 mb-4'>Sign In</legend>
           <div className='form-group mx-4'>
-            <label htmlFor='exampleInputEmail1'>Email address</label>
+            <label htmlFor='userEmail'>Email address</label>
             <input
               onChange={onEmailChange}
               type='email'
               className='form-control'
-              id='exampleInputEmail1'
+              id='userEmail'
               aria-describedby='emailHelp'
               placeholder='Enter email'
             />
           </div>
           <div className='form-group mx-4'>
-            <label htmlFor='exampleInputPassword1'>Password</label>
+            <label htmlFor='userPassword'>Password</label>
             <input
               onChange={onPasswordChange}
               type='password'
               className='form-control'
-              id='exampleInputPassword1'
+              id='userPassword'
               placeholder='Password'
             />
           </div>
