@@ -28,7 +28,7 @@ const Register = ({ onRouteChange, loadUser }) => {
     })
       .then(response => response.json())
       .then(user => {
-        if (user) {
+        if (user.id) {
           loadUser(user);
           onRouteChange('home');
         }
@@ -50,6 +50,7 @@ const Register = ({ onRouteChange, loadUser }) => {
               className='form-control'
               id='name'
               placeholder='Enter name'
+              required
             />
           </div>
           <div className='form-group mx-4'>
@@ -60,6 +61,7 @@ const Register = ({ onRouteChange, loadUser }) => {
               className='form-control'
               id='email'
               placeholder='Enter email'
+              required
             />
           </div>
           <div className='form-group mx-4'>
@@ -70,6 +72,7 @@ const Register = ({ onRouteChange, loadUser }) => {
               className='form-control'
               id='password'
               placeholder='Password'
+              required
             />
           </div>
           <div>

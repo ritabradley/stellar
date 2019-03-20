@@ -46,6 +46,7 @@ const Signin = ({ onRouteChange, loadUser }) => {
               id='userEmail'
               aria-describedby='emailHelp'
               placeholder='Enter email'
+              required
             />
           </div>
           <div className='form-group mx-4'>
@@ -56,6 +57,7 @@ const Signin = ({ onRouteChange, loadUser }) => {
               className='form-control'
               id='userPassword'
               placeholder='Password'
+              required
             />
           </div>
           <div>
