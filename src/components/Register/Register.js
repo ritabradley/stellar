@@ -17,7 +17,7 @@ const Register = ({ onRouteChange, loadUser }) => {
   };
 
   const onRegisterSubmit = () => {
-    fetch('http://localhost:3000/register', {
+    fetch('https://sleepy-crag-47754.herokuapp.com/register', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
